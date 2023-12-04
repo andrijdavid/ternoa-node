@@ -1,3 +1,7 @@
+[![Docker Repository on Quay](https://quay.io/repository/andrijdavid/ternoa-node/status "Docker Repository on Quay")](https://quay.io/repository/andrijdavid/ternoa-node)
+![Docker build](https://github.com/andrijdavid/ternoa-node/actions/workflows/docker.yml/badge.svg)
+
+
 # Ternoa Node Docker Image
 
 This repository contains a Docker image for running a Ternoa node on your system. Ternoa is a blockchain project that focuses on preserving and transmitting digital data across generations using NFT Time Capsules.

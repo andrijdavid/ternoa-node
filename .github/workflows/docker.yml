@@ -57,7 +57,7 @@ jobs:
       - name: Set up Docker Buildx
         if: steps.image_exists.outcome != 'success'
         uses: docker/setup-buildx-action@v2
-        
+
       - name: Build and push
         if: steps.image_exists.outcome != 'success'
         uses: docker/build-push-action@v4
@@ -67,4 +67,17 @@ jobs:
           tags: quay.io/andrijdavid/ternoa-node:latest, quay.io/andrijdavid/ternoa-node:${{ steps.ternoa.outputs.tag_name }}, ghcr.io/andrijdavid/ternoa-node:latest, ghcr.io/andrijdavid/ternoa-node:${{ steps.ternoa.outputs.tag_name }}
           build-args: |
             VER=${{ steps.ternoa.outputs.tag_name }}
-          
+      - name: Run Snyk to check Docker image for vulnerabilities
+        continue-on-error: true
+        uses: snyk/actions/docker@master
+        env:
+          SNYK_TOKEN: ${{ secrets.SNYK_TOKEN }}
+        with:
+          image: quay.io/andrijdavid/ternoa-node:latest
+          args: --file=Dockerfile
+      - name: Upload result to GitHub Code Scanning
+        uses: github/codeql-action/upload-sarif@v2
+        with:
+          sarif_file: snyk.sarif
+
+      

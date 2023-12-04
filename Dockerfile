@@ -1,3 +1,4 @@
+ARG VER=v1.3.2
 FROM debian:12.2-slim as builder
 
 
