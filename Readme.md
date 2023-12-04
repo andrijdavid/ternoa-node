@@ -1,4 +1,4 @@
-[![Docker Repository on Quay](https://quay.io/repository/andrijdavid/ternoa-node/status "Docker Repository on Quay")](https://quay.io/repository/andrijdavid/ternoa-node)
+![Docker Repository on Quay](https://quay.io/repository/andrijdavid/ternoa-node/status "Docker Repository on Quay")](https://quay.io/repository/andrijdavid/ternoa-node)
 ![Docker build](https://github.com/andrijdavid/ternoa-node/actions/workflows/docker.yml/badge.svg)
 
 

@@ -67,6 +67,7 @@ jobs:
           tags: quay.io/andrijdavid/ternoa-node:latest, quay.io/andrijdavid/ternoa-node:${{ steps.ternoa.outputs.tag_name }}, ghcr.io/andrijdavid/ternoa-node:latest, ghcr.io/andrijdavid/ternoa-node:${{ steps.ternoa.outputs.tag_name }}
           build-args: |
             VER=${{ steps.ternoa.outputs.tag_name }}
+            
       - name: Run Snyk to check Docker image for vulnerabilities
         continue-on-error: true
         uses: snyk/actions/docker@master
