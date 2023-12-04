@@ -1,4 +1,4 @@
-FROM debian:11.4-slim as builder
+FROM debian:12.2-slim as builder
 
 
 # This installs all dependencies that we need (besides Rust).
@@ -14,7 +14,7 @@ RUN git clone --recurse-submodules https://github.com/capsule-corp-ternoa/ternoa
 
 WORKDIR /ternoa-node 
 
-RUN git checkout $(git describe --tags)
+RUN git checkout $VER
 
 # This builds the binary.
 RUN $HOME/.cargo/bin/cargo build --locked --release

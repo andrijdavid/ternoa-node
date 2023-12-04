@@ -20,13 +20,20 @@ jobs:
           draft: false
           prerelease: false
           latest: true
-      -
-        name: Login to Quay.io
+          
+      - name: Login to Quay.io
         uses: docker/login-action@v2
         with:
           registry: quay.io
           username: ${{ secrets.QUAYIO_USERNAME }}
           password: ${{ secrets.QUAYIO_TOKEN }}
+
+      - name: Login to GitHub Container Registry
+        uses: docker/login-action@v3
+        with:
+          registry: ghcr.io
+          username: ${{ github.repository_owner }}
+          password: ${{ github.token }}
           
       - name: Check image tag exists
         id: image_exists
@@ -57,7 +64,7 @@ jobs:
         with:
           push: true
           platforms: linux/amd64
-          tags: quay.io/andrijdavid/ternoa-node:latest, quay.io/andrijdavid/ternoa-node:${{ steps.ternoa.outputs.tag_name }}
+          tags: quay.io/andrijdavid/ternoa-node:latest, quay.io/andrijdavid/ternoa-node:${{ steps.ternoa.outputs.tag_name }}, ghcr.io/andrijdavid/ternoa-node:latest, ghcr.io/andrijdavid/ternoa-node:${{ steps.ternoa.outputs.tag_name }}
           build-args: |
             VER=${{ steps.ternoa.outputs.tag_name }}
           
