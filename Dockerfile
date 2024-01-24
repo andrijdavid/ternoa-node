@@ -1,4 +1,4 @@
-FROM debian:12.2-slim as builder
+FROM debian:12.4-slim as builder
 ARG VER=v1.3.2
 
 # This installs all dependencies that we need (besides Rust).
