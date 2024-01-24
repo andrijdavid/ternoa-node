@@ -1,4 +1,4 @@
-![Docker Repository on Quay](https://quay.io/repository/andrijdavid/ternoa-node/status "Docker Repository on Quay")](https://quay.io/repository/andrijdavid/ternoa-node)
+![Docker Repository on Quay](https://quay.io/repository/andrijdavid/ternoa-node/status "Docker Repository on Quay")
 ![Docker build](https://github.com/andrijdavid/ternoa-node/actions/workflows/docker.yml/badge.svg)
 
 
@@ -43,4 +43,8 @@ Follow these steps to get the Ternoa node up and running using Docker.
 If you need to customize the Ternoa node configuration, you can mount a configuration file into the container. For example:
 
 ```bash
-docker run -d --name ternoa-node -p 5000:5000 -v /path/to/config:/app/config your-username/ternoa-node:latest
+docker run -d --name ternoa-node -p 5000:5000 -v /path/to/config:/opt/node-data your-username/ternoa-node:latest --name MyFirstNode --chain alphanet --base-path /opt/node-data --validator --state-cache-size 0 --execution wasm
+```
+More information here [https://www.ternoa.network/validators](https://docs.ternoa.network/for-node-operators/system-requirements)
+
+TERNOA: 5CLkPH698WWp1RtTH7pKvN6Y4C94DeypiyNnxgdiEAgLuBUC
