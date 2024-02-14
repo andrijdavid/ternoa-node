@@ -23,6 +23,6 @@ FROM bitnami/minideb
 
 COPY --from=builder /ternoa-node/target/release/ternoa /bin/ternoa
 VOLUME /data
-EXPOSE 30333 9933 9944 9615
+# EXPOSE 30333 9933 9944 9615
 ENTRYPOINT ["/bin/ternoa"]
 
