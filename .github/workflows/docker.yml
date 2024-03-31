@@ -18,7 +18,7 @@ jobs:
         with:
           repo: capsule-corp-ternoa/ternoa-node 
           draft: false
-          prerelease: false
+          prerelease: true
           latest: true
 
       - name: Login to Quay.io
