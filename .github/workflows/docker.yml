@@ -63,8 +63,6 @@ jobs:
         uses: docker/build-push-action@v5
         with:
           push: true
-          load: true
-          sbom: true
           platforms: linux/amd64
           tags: quay.io/andrijdavid/ternoa-node:latest, quay.io/andrijdavid/ternoa-node:${{ steps.ternoa.outputs.tag_name }}
           build-args: |
