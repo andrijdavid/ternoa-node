@@ -29,21 +29,37 @@ Follow these steps to get the Ternoa node up and running using Docker.
 2. Run the Ternoa node container:
 
     ```bash
-    docker run -d --name ternoa-node -p 5000:5000 quay.io/andrijdavid/ternoa-node:latest
+    docker run -d --name ternoa-node -p 127.0.0.1:9944:9944 -p 127.0.0.1:9933:9933 -p 30333:30333 quay.io/andrijdavid/ternoa-node:latest
     ```
 
     This command starts the Ternoa node container in detached mode, mapping port 5000 on your host to port 5000 in the container. Adjust the port mapping as needed.
 
-3. Access the Ternoa node:
+   `/data`
 
-    Open your web browser and navigate to [http://localhost:5000](http://localhost:5000). You should see the Ternoa node interface.
+    This container uses a local folder to store the chain data. This means that every time a new container is created the chain will start from block 0. To avoid this the container volume `/data` needs to be mapped to a directory on the host machine. With this mapping done all the chain data will be stored on the host and it can be used with multiple containers.
+   
+    ```bash
+        docker run -d -v ./ternoa-data:/data --name ternoa-node -p 127.0.0.1:9944:9944 -p 127.0.0.1:9933:9933 -p 30333:30333 quay.io/andrijdavid/ternoa-node:latest
+    ```
+
+    You can pass additional parameters
+   ```bash
+        docker run -d -v ./ternoa-data:/data --name ternoa-node -p 127.0.0.1:9944:9944 -p 127.0.0.1:9933:9933 -p 30333:30333 quay.io/andrijdavid/ternoa-node:latest --chain alphanet-dev --alice --tmp --name MyLocalNode --rpc-external --ws-external --rpc-cors all --telemetry-url "wss://telemetry.polkadot.io/submit/ 0"
+    ```   
+   If You Want To Run An Archive Node
+
+```bash
+  docker run -d -v ./ternoa-data:/data --name ternoa-node -p 127.0.0.1:9944:9944 -p 127.0.0.1:9933:9933 -p 127.0.0.1:30333:30333 quay.io/andrijdavid/ternoa-node:latest --name MyFirstNode  --chain mainnet --base-path /block/chain/node-data --ws-max-connections 1000 --validator --telemetry-url "wss://telemetry.polkadot.io/submit/ 0" --state-pruning archive
+```
+
+
 
 ## Customization
 
 If you need to customize the Ternoa node configuration, you can mount a configuration file into the container. For example:
 
 ```bash
-docker run -d --name ternoa-node -p 5000:5000 -v /path/to/config:/opt/node-data your-username/ternoa-node:latest --name MyFirstNode --chain alphanet --base-path /opt/node-data --validator --state-cache-size 0 --execution wasm
+docker run -d --name ternoa-node -p 127.0.0.1:9944:9944 -p 127.0.0.1:9933:9933 -p 30333:30333 -v /path/to/config:/opt/node-data your-username/ternoa-node:latest --name MyFirstNode --chain alphanet --base-path /opt/node-data --validator --execution wasm
 ```
 More information here [https://www.ternoa.network/validators](https://docs.ternoa.network/for-node-operators/system-requirements)
 
