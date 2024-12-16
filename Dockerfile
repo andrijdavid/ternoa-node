@@ -10,19 +10,18 @@ RUN curl --proto '=https' --tlsv1.2 -sSf https://sh.rustup.rs > rust_install.sh 
     . $HOME/.cargo/env && rustup update && rustup show
 
 # Get all submodules
-RUN git clone --recurse-submodules https://github.com/capsule-corp-ternoa/ternoa-node 
+RUN git clone --recurse-submodules https://github.com/capsule-corp-ternoa/ternoa-node
 
-WORKDIR /ternoa-node 
+WORKDIR /ternoa-node
 
 RUN git checkout $VER
 
 # This builds the binary.
 RUN $HOME/.cargo/bin/cargo build --release
 
-FROM bitnami/minideb
+FROM bitnami/minideb:latest-amd64
 
 COPY --from=builder /ternoa-node/target/release/ternoa /bin/ternoa
 VOLUME /data
 # EXPOSE 30333 9933 9944 9615
 ENTRYPOINT ["/bin/ternoa"]
-
