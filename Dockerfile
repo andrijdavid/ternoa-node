@@ -17,7 +17,7 @@ WORKDIR /ternoa-node
 RUN git checkout $VER
 
 # This builds the binary.
-RUN $HOME/.cargo/bin/cargo build --locked --release
+RUN $HOME/.cargo/bin/cargo build --release
 
 FROM bitnami/minideb
 
