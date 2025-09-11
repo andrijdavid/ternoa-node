@@ -19,7 +19,7 @@ RUN git checkout $VER
 # This builds the binary.
 RUN $HOME/.cargo/bin/cargo build --release
 
-FROM bitnami/minideb
+FROM bitnami/minideb:bookworm
 
 COPY --from=builder /ternoa-node/target/release/ternoa /bin/ternoa
 VOLUME /data
